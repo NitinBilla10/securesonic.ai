@@ -91,11 +91,7 @@ const SONIC_CHAIN_ID_HEX = "0xdede"; // Hex format for MetaMask switching
     }
   };
   
-  useEffect(() => {
-    if (window.ethereum) {
-      checkWalletConnection(); // ✅ Call the function on mount
-    }
-  }, []);
+
   
 
   // const switchToSonicNetwork = async () => {
