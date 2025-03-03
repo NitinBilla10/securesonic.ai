@@ -34,12 +34,7 @@ const Navbar = () => {
           <Link href="/" className="text-gray-300 hover:text-cyan-400 transition-all duration-300">
             Home
           </Link>
-          <Link href="/about" className="text-gray-300 hover:text-cyan-400 transition-all duration-300">
-            About
-          </Link>
-          <Link href="/docs" className="text-gray-300 hover:text-cyan-400 transition-all duration-300">
-            Docs
-          </Link>
+
 
           {walletConnected ? (
             <motion.div 

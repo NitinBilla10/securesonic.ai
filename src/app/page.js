@@ -145,10 +145,20 @@ const SONIC_CHAIN_ID_HEX = "0xdede"; // Hex format for MetaMask switching
   //   }
   // };
   
+  const isValidSolidityContract = (code) => {
+    // ✅ Must start with `pragma solidity`
+    if (!code.includes("pragma solidity")) return false;
   
+    // ✅ Must define a `contract` or `interface`
+    if (!/contract\s+\w+|interface\s+\w+/.test(code)) return false;
+  
+    return true;
+  };
   
 
   const handleAudit = async () => {
+
+    
     if (!walletConnected) {
       alert('Connect your wallet first!');
       return;
@@ -157,7 +167,12 @@ const SONIC_CHAIN_ID_HEX = "0xdede"; // Hex format for MetaMask switching
       alert('Paste your Solidity contract first!');
       return;
     }
-  
+      // 🚨 Validate Solidity Contract
+  if (!isValidSolidityContract(contract)) {
+    alert('❌ Invalid contract! Please paste a valid Solidity smart contract.');
+    return;
+  }
+    
     setUploading(true);
   
     try {
