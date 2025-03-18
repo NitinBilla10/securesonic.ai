@@ -62,7 +62,8 @@ const SONIC_RPC_URL = "https://rpc.blaze.soniclabs.com";
     }
   ];
 
-  const SONIC_CHAIN_ID = 57054; // Decimal format for internal logic
+  const SONIC_CHAIN_ID = 57054;
+  const MAIN_SONIC_CHAIN_ID = 146;// Decimal format for internal logic
 const SONIC_CHAIN_ID_HEX = "0xdede"; // Hex format for MetaMask switching
 
 
@@ -165,7 +166,7 @@ const SONIC_CHAIN_ID_HEX = "0xdede"; // Hex format for MetaMask switching
     }
     if (!contract.trim()) {
       alert('Paste your Solidity contract first!');
-      return;
+      return; 
     }
       // 🚨 Validate Solidity Contract
   if (!isValidSolidityContract(contract)) {
@@ -230,7 +231,7 @@ const SONIC_CHAIN_ID_HEX = "0xdede"; // Hex format for MetaMask switching
       const network = await provider.getNetwork();
       console.log("Connected Network:", network.chainId);
   
-      if (Number(network.chainId) !== SONIC_CHAIN_ID) {
+      if (Number(network.chainId) !== SONIC_CHAIN_ID || MAIN_SONIC_CHAIN_ID) {
         alert("⚠️ You must be on Sonic Blockchain to deploy.");
         setDeploying(false);
         return;
