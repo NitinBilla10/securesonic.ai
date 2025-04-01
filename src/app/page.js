@@ -231,7 +231,7 @@ const SONIC_CHAIN_ID_HEX = "0xdede"; // Hex format for MetaMask switching
       const network = await provider.getNetwork();
       console.log("Connected Network:", network.chainId);
   
-      if (Number(network.chainId) !== SONIC_CHAIN_ID || MAIN_SONIC_CHAIN_ID) {
+      if (Number(network.chainId) !== SONIC_CHAIN_ID && Number(network.chainId) !== MAIN_SONIC_CHAIN_ID) {
         alert("⚠️ You must be on Sonic Blockchain to deploy.");
         setDeploying(false);
         return;
