@@ -227,15 +227,10 @@ const SONIC_CHAIN_ID_HEX = "0xdede"; // Hex format for MetaMask switching
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
   
-      // ✅ Check if user is on Sonic Network
+      // 🌐 Get current network details
       const network = await provider.getNetwork();
-      console.log("Connected Network:", network.chainId);
+      console.log("🌐 Connected to Chain:", network.chainId);
   
-      if (Number(network.chainId) !== SONIC_CHAIN_ID && Number(network.chainId) !== MAIN_SONIC_CHAIN_ID) {
-        alert("⚠️ You must be on Sonic Blockchain to deploy.");
-        setDeploying(false);
-        return;
-      }
   
       // ✅ Compile Solidity Code Using API
       const response = await fetch("/api/compile", {
@@ -251,9 +246,10 @@ const SONIC_CHAIN_ID_HEX = "0xdede"; // Hex format for MetaMask switching
         throw new Error("❌ Compilation failed. ABI or Bytecode is missing.");
       }
   
-      // ✅ Deploy the contract using ABI & Bytecode
+      // ✅ Deploy contract using ABI & Bytecode
       const factory = new ethers.ContractFactory(compiled.abi, compiled.bytecode, signer);
       const contract = await factory.deploy();
+  
       await contract.waitForDeployment();
   
       console.log("✅ Contract Deployed at:", contract.target);
@@ -268,6 +264,7 @@ const SONIC_CHAIN_ID_HEX = "0xdede"; // Hex format for MetaMask switching
   
     setDeploying(false);
   };
+  
   
   
 
@@ -532,12 +529,12 @@ const SONIC_CHAIN_ID_HEX = "0xdede"; // Hex format for MetaMask switching
                       {deploying ? (
                         <>
                           <Cpu className="animate-spin mr-2" size={18} />
-                          Deploying to Sonic...
+                          Deploying Contract...
                         </>
                       ) : (
                         <>
                           <ArrowRight className="mr-2" size={18} />
-                          Deploy to Sonic
+                          Deploy
                         </>
                       )}
                     </span>
